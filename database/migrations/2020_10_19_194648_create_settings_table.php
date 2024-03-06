@@ -15,8 +15,7 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('mail_driver_id')->nullable()->unsigned();
-            $table->foreign('mail_driver_id')->references('id')->onDelete('cascade')->on('mail_drivers');            
+            
             $table->timestamps();
         });
     }

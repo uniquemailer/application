@@ -59,7 +59,7 @@ class LogSentMessage
                 ]
         );
 
-        DB::table('api_audits')->where('transaction_id', $emailModel->getTransactionId())->update(['status' => 'SENT']);
+        DB::table('api_audits')->where('transaction_id', $emailModel->getTransactionId())->update(['status' => 1]);
 
     }
 }

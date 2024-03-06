@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Role::truncate();
         $this->truncateTables([
             'templates',
             'services',

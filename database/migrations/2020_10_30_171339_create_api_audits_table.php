@@ -17,10 +17,9 @@ class CreateApiAuditsTable extends Migration
             $table->id();
             $table->string('transaction_id')->index()->nullable();
             $table->string('request')->nullable();
-            $table->integer('user_id')->nullable()->after('id');
-            $table->integer('service_id')->nullable()->after('id');
-            $table->integer('status')->nullable()->after('service_id');
-
+            $table->integer('user_id')->nullable();
+            $table->integer('service_id')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

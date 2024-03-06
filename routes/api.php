@@ -18,7 +18,7 @@ Route::group(['middleware' => ['api', 'auth:sanctum']], function(){
     Route::post('/services/{service}/send', [App\Http\Controllers\Api\ApiController::class, 'send'])
                     ->name('sendby.service')
                     ->missing(function (Request $request) {
-                            return Redirect::route('api.notfound');
+                            abort(404);
     });
 /*     Route::get('/notfound', [App\Http\Controllers\Api\ApiController::class, 'notfound'])->name('api.notfound');
     Route::get('/services', [App\Http\Controllers\Api\ServiceController::class, 'index'])->name('service.index');

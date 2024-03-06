@@ -42,15 +42,15 @@ class LogSentMessage
             }
         }
 
-        $emails = null;
+        $emails = [];
         foreach($to as $t){
-            $emails .= $t->getAddress() . ", ";
+            $emails[] = $t->getAddress();
         }
-        $emails = substr($emails, 0, strlen($emails)-2);
+        //$emails = substr($emails, 0, strlen($emails)-2);
         DB::table('email_audits')->insert(
             [
                 'message' => $body,
-                'to' => $emails,
+                'to' => json_encode($emails),
                 'subject'=> $event->message->getSubject(),
                 'service' => $service->name,
                 'template' => $template->name,

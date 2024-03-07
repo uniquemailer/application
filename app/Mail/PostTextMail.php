@@ -7,9 +7,9 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Helpers\Email;
 use Mustache_Engine;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
+ 
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailables\Content;
 
 class PostTextMail extends Mailable implements ShouldQueue
 {
@@ -35,11 +35,22 @@ class PostTextMail extends Mailable implements ShouldQueue
         return $template->text_template;
     }
 
+
+    public function content(): Content
+    {
+        $data = $this->email_model->getPlaceholders();
+        return new Content(
+            htmlString: $this->getTextTemplate(),
+            with: $data
+        );
+    }
+
     /**
      * Build the message.
      *
      * @return $this
      */
+    /* 
     public function build()
     {
         $data = $this->email_model->getPlaceholders();
@@ -52,5 +63,5 @@ class PostTextMail extends Mailable implements ShouldQueue
             ->subject($this->email_model->getSubject())
             ->text($email_body)
             ->with($data);
-    }
+    } */
 }

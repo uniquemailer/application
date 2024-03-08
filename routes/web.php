@@ -21,30 +21,7 @@ use Illuminate\Support\Str;
 
 Route::get('/debug', function () {
 
-    for ($i = 0; $i < 100; $i++) {
-
-        $transaction_id =  Str::random(40);
-        DB::table('api_audits')->insert(
-            [
-                'transaction_id' => $transaction_id,
-                'user_id' => 1,
-                'service_id' => 1,
-                'created_at' => fake()->dateTimeBetween(Carbon::now()->subDays(30), Carbon::now())
-            ]
-        );
-
-        DB::table('email_audits')->insert(
-            [
-                'transaction_id' => $transaction_id,
-                'message' => 'test',
-                'to' => fake()->email(),
-                'subject' => fake()->sentence(),
-                'service' => 'Contact form service',
-                'template' => 'Contact Form',
-                'created_at' => fake()->dateTimeBetween( Carbon::now()->subDays(30), Carbon::now())
-            ]
-        );
-    }
+    dd(storage_path('emails-templates'));
 });
 
 

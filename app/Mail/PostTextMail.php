@@ -6,10 +6,12 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Helpers\Email;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Mustache_Engine;
  
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailables\Content;
+use Illuminate\Support\Facades\Storage;
 
 class PostTextMail extends Mailable implements ShouldQueue
 {
@@ -29,21 +31,32 @@ class PostTextMail extends Mailable implements ShouldQueue
         $this->template_engine = new Mustache_Engine;
     }
 
-    public function getTextTemplate(): ?string
+/*     public function getTextTemplate(): ?string
     {
         $template = $this->email_model->getTemplate();
         return $template->text_template;
+    } */
+
+    public function getTextTemplate(): ?string
+    {
+        $template = $this->email_model->getTemplate();
+        if (!file_exists(Storage::get('emails-templates/' . $template->filename . '.blade.php'))) {
+ 
+            Storage::put('emails-templates/' . $template->filename . '.blade.php', $template->text_template);
+        }
+        return $template->filename ;
     }
 
 
     public function content(): Content
     {
+        $template = $this->getTextTemplate();
         $data = $this->email_model->getPlaceholders();
         return new Content(
-            htmlString: $this->getTextTemplate(),
+            text:  $template,
             with: $data
         );
-    }
+    } 
 
     /**
      * Build the message.

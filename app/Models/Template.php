@@ -9,7 +9,7 @@ class Template extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'subject', 'filename', 'placeholders', 'sensitive_placeholders', 'html_template'];
+    protected $fillable = ['name', 'subject', 'filename', 'placeholders', 'sensitive_placeholders', 'html_template', 'text_template'];
 
     protected $casts = [
         'placeholders' => 'array',

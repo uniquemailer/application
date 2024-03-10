@@ -31,12 +31,6 @@ class PostTextMail extends Mailable implements ShouldQueue
         $this->template_engine = new Mustache_Engine;
     }
 
-/*     public function getTextTemplate(): ?string
-    {
-        $template = $this->email_model->getTemplate();
-        return $template->text_template;
-    } */
-
     public function getTextTemplate(): ?string
     {
         $template = $this->email_model->getTemplate();

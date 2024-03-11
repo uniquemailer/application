@@ -21,6 +21,10 @@ class ApiLog extends Page implements HasTable
 
     protected static ?int $navigationSort = 10;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()->hasRole(['admin']);
+    }
 
     public function table(Table $table): Table
     {

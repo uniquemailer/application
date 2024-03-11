@@ -65,7 +65,7 @@ class TemplateResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    //Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -83,6 +83,7 @@ class TemplateResource extends Resource
             'index' => Pages\ListTemplates::route('/'),
             'create' => Pages\CreateTemplate::route('/create'),
             'edit' => Pages\EditTemplate::route('/{record}/edit'),
+            'view' => Pages\ViewTemplate::route('/{record}'),
         ];
     }
 }

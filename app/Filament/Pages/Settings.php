@@ -25,6 +25,11 @@ class Settings extends Page implements HasForms
 
     public ?array $data = [];
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()->hasRole(['admin']);
+    }
+    
     public function form(Form $form): Form
     {
         return $form

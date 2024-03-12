@@ -26,7 +26,7 @@ class EmailLog extends Page implements HasTable
         return $table
             ->query(EmailAudit::query()->orderByDesc('created_at'))
             ->columns([
-                TextColumn::make('transaction_id'),
+                TextColumn::make('transaction_id')->searchable(),
                 TextColumn::make('to'),
                 TextColumn::make('service'),
                 TextColumn::make('template'),

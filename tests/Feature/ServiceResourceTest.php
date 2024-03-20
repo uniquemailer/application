@@ -20,7 +20,6 @@ it('can create', function () {
     livewire(ServiceResource\Pages\CreateService::class)
         ->fillForm([
             'name' => $newData->name,
-            'slug' => $newData->slug,
             'template_id' => $newData->template_id,
             'email_type' => 'HTML'
         ])
@@ -29,7 +28,6 @@ it('can create', function () {
 
     $this->assertDatabaseHas(Service::class, [
         'name' => $newData->name,
-        'slug' => $newData->slug,
         'template_id' => $newData->template_id,
         'email_type' => $newData->email_type,
     ]);

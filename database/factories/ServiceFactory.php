@@ -16,7 +16,6 @@ class ServiceFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'slug' => $this->faker->slug(),
             'template_id' => Template::all()->random()->id,
             'email_type' => 'HTML'
         ];

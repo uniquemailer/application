@@ -10,11 +10,10 @@ You may create templates and product/services in the application. This will give
 
 The software is built with Laravel framework. The current release is based on Laravel v10. All server requirements are the same as with Laravel. We highly recommend you to use Redis for cache and queue support.
 
-You can find the entire documentation for this package [on our documentation site](https://uniquemailer.github.io/docs)
 
 ## Documentation
 
-You can find the entire documentation for this package [on our documentation site](https://uniquemailer.github.io/docs).
+You can find the entire documentation for this software [on our documentation site](https://uniquemailer.github.io/docs).
 
 ## License
 

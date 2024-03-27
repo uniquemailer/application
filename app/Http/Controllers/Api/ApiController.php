@@ -10,6 +10,7 @@ use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SendEmailRequest;
 use App\Services\EmailService;
 use App\Services\LogService;
 
@@ -20,7 +21,7 @@ class ApiController extends Controller
         return response(null, 404)->header('Content-Type', 'application/json');
     }
 
-    public function send(Request $request, Service $service, LogService $logService, EmailService $emailService)
+    public function send(SendEmailRequest $request, Service $service, LogService $logService, EmailService $emailService)
     {
         $email = new Email();
         $email->setService($service);

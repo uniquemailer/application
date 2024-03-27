@@ -24,7 +24,7 @@ class GenerateApiKey extends Page
     public function generateApiKey()
     {
         $user = Auth::user();
-        $created_token = $user->createToken('APIClient');
+        $created_token = $user->createToken('api-client', ['send']);
         $this->key = $created_token->plainTextToken;
     }
 }

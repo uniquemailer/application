@@ -13,7 +13,12 @@ class Service extends Model
 {
     use HasFactory, SoftDeletes, HasSlug;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'slug',
+        'template_id',
+        'email_type'
+    ];
 
     public function template()
     {

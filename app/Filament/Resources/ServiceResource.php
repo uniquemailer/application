@@ -31,6 +31,10 @@ class ServiceResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required(),
+
+                    Forms\Components\TextInput::make('slug')->visibleOn('view')
+                    ->required(),
+
                 Forms\Components\Select::make('template_id')
                     ->options(
                         Template::query()
@@ -38,6 +42,8 @@ class ServiceResource extends Resource
                             ->toArray()
                     )->label('Template')
                     ->required(),
+
+                     
 
                 Forms\Components\Select::make('email_type')
                     ->label('Email format')
@@ -76,6 +82,7 @@ class ServiceResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -97,6 +104,7 @@ class ServiceResource extends Resource
             'index' => Pages\ListServices::route('/'),
             'create' => Pages\CreateService::route('/create'),
             'edit' => Pages\EditService::route('/{record}/edit'),
+            'view' => Pages\ViewService::route('/{record}'),
         ];
     }
 }

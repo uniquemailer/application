@@ -1,11 +1,6 @@
 <?php
 
-use App\Models\EmailAudit;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +15,7 @@ use Illuminate\Support\Str;
 
 
 Route::get('/debug', function () {
-
-    dd(storage_path('emails-templates'));
+    return response()->json(['time' => time()]);
 });
 
 

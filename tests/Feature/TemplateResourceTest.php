@@ -1,20 +1,22 @@
 <?php
 
-namespace Tests\Feature;
+use App\Filament\Resources\TemplateResource;
+use App\Models\Template;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
+use function Pest\Livewire\livewire;
 
-class TemplateResourceTest extends TestCase
-{
-    /**
-     * A basic feature test example.
-     */
-    public function test_example(): void
-    {
-        $response = $this->get('/');
+it('can retrieve a template', function () {
+    $template = Template::factory()->create();
 
-        $response->assertStatus(200);
-    }
-}
+    livewire(
+        TemplateResource\Pages\EditTemplate::class,
+        [
+            'record' => $template->getRouteKey(),
+        ]
+    )
+        ->assertFormSet([
+            'name' => $template->name,
+            'subject' => $template->subject,
+            'placeholders' => $template->placeholders,
+        ]);
+});

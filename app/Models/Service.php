@@ -46,6 +46,15 @@ class Service extends Model
         return null;
     }
 
+
+    public function getTemplateSubjectAttribute()
+    {
+        if ($this->template) {
+            return $this->template->subject;
+        }
+        return null;
+    }
+
     /**
      * Get the options for generating the slug.
      */

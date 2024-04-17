@@ -32,7 +32,7 @@ it('can create', function () {
     ]);
 });
 
-it('can retrieve  a service', function () {
+it('can retrieve a service', function () {
     Template::factory()->create();
     $newData = Service::factory()->create();
 

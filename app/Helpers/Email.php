@@ -4,8 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Template;
 use Illuminate\Support\Str;
-use App\Models\Service;
-use Illuminate\Http\Request;
+use App\Models\Service; 
 
 class Email
 {
@@ -135,16 +134,16 @@ class Email
         $template = $service->template;
         $this->setSensitiveKeys($template->sensitive_placeholders);
         $placeholders = array_merge($template->placeholders, $template->sensitive_placeholders);
-        $variables = $this->updateVarialbleList($placeholders, $request);
+        $variables = $this->updateVariableList($placeholders, $request);
 
         $this->setTransactionId();
         $this->setSubject($service->template->subject);
         $this->setTemplate($service->template);
         $this->setPlaceholders($variables);
         $this->email_type = $service->email_type;
-    }
-
-    private function updateVarialbleList($placeholders, array $request)
+    } 
+    
+    private function updateVariableList($placeholders, array $request)
     {
         $variables = [];
 
@@ -158,12 +157,12 @@ class Email
         return $variables;
     }
 
-    public function getEmailsFromRequest(Request $request): array
+    public function getEmailsFromRequest(array $request): array
     {
         $to_emails = [];
-
-        if (is_array($request->to)){
-            foreach ($request->to as $toemail) {
+         
+        if (is_array($request)) {
+            foreach ($request as $toemail) {
                 $to_emails[] = trim($toemail);
             }
         }

@@ -15,7 +15,19 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/debug', function () {
-    return response()->json(['time' => time()]);
+
+    $data = [
+        'data' =>
+        [
+            "customer_name" => fake()->name(),
+            "customer_email" => fake()->email(),
+            "product_name" => fake()->catchPhrase()
+        ],
+        'to' => [
+            'to' => fake()->email()
+        ]
+    ];
+    return response()->json($data);
 });
 
 

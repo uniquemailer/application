@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Template;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ServiceFactory extends Factory
 {
@@ -14,10 +15,12 @@ class ServiceFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->word();
         return [
-            'name' => $this->faker->word(),
+            'name' => $name,
             'template_id' => Template::all()->random()->id,
-            'email_type' => 'HTML'
+            'email_type' => 'HTML',
+            'slug' => Str::of($name)->slug('-')
         ];
     }
 }

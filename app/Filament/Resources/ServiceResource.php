@@ -3,18 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ServiceResource\Pages;
-use App\Filament\Resources\ServiceResource\RelationManagers;
-use App\Models\ContactGroup;
 use App\Models\Service;
 use App\Models\Template;
 use Filament\Forms;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ServiceResource extends Resource
 {
@@ -41,10 +36,8 @@ class ServiceResource extends Resource
                             ->pluck('name', 'id')
                             ->toArray()
                     )->label('Template')
-                    ->required(),
-
-                     
-
+                    ->required(), 
+                    
                 Forms\Components\Select::make('email_type')
                     ->label('Email format')
                     ->options([

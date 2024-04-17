@@ -28,7 +28,7 @@ class ApiController extends Controller
         $email->createContent($request->data);
         $email->setTransactionId($request->transaction_id);
 
-        $to_emails = $email->getEmailsFromRequest($request);
+        $to_emails = $email->getEmailsFromRequest($request->to);
         $transactionId = $email->getTransactionId();
 
         $user = Auth::user();

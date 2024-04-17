@@ -1,11 +1,6 @@
 <?php
 
-use App\Models\EmailAudit;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +16,18 @@ use Illuminate\Support\Str;
 
 Route::get('/debug', function () {
 
-    dd(storage_path('emails-templates'));
+    $data = [
+        'data' =>
+        [
+            "customer_name" => fake()->name(),
+            "customer_email" => fake()->email(),
+            "product_name" => fake()->catchPhrase()
+        ],
+        'to' => [
+            'to' => fake()->email()
+        ]
+    ];
+    return response()->json($data);
 });
 
 

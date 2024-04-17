@@ -27,8 +27,8 @@ class TemplateFactory extends Factory
             'filename' => $this->faker->word,
             'placeholders' => ['product_name'],
             'sensitive_placeholders' => ['customer_name', 'customer_email'],
-            'html_template' => '<h3>{{customer_name}}</h3> This is the product {{product_name}}',
-            'text_template' => '{{customer_name}} This is the product {{product_name}}'
+            'html_template' => '<h3>{{customer_name}}</h3> This is the product {{product_name}}. <p>This email is {{customer_email}}</p>',
+            'text_template' => '{{customer_name}} This is the product {{product_name}. This email is {{customer_email}}'
         ];
     }
 }

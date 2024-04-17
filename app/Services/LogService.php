@@ -24,7 +24,7 @@ class LogService
     private function parse_data(Request $request, array $keys): string
     {
         $data = $request->json()->all();
-        if (is_array($data['data'])){
+        if (!empty(($data['data']) && is_array($data['data']))){
             foreach($data['data'] as $key => $value){
                 if (in_array($key, $keys)){
                     $data['data'][$key] = str_repeat('*', strlen ($value));    

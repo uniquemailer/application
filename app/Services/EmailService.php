@@ -25,8 +25,6 @@ class EmailService
                 Mail::to($chunk)->queue((new PostHtmlMail($email))->onQueue('emails'));
             }else{
                 Mail::to($chunk)->queue((new PostTextMail($email))->onQueue('emails'));
- 
-
             }
         }
     }

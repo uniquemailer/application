@@ -32,12 +32,13 @@ class Service extends Model
 
     public function contactGroupsList()
     {
+        $rst = '';
         foreach ($this->contactGroups as $contactGroup) {
-            $rst[] = $contactGroup->name;
+            $rst .= $contactGroup->name . ', ';
         }
-        return $rst;
+        return substr($rst, 0, strlen($rst) - 2);
     }
-
+ 
     public function getTemplateNameAttribute()
     {
         if ($this->template) {

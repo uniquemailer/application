@@ -28,6 +28,7 @@ class ServiceResource extends Resource
                     ->required(),
 
                     Forms\Components\TextInput::make('slug')->visibleOn('view')
+                    ->label('Enpoint URL')
                     ->required(),
 
                 Forms\Components\Select::make('template_id')

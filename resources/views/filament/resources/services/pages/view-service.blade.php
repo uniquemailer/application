@@ -64,7 +64,7 @@
             API Endpoint:
         </div>
         <div class="grow">
-            <code>(POST) {{ env('APP_URL') }}/api/{{ $record->slug }}</code>
+            <code>(POST) {{ env('APP_URL') }}/api/services/{{ $record->slug }}/send</code>
         </div>
     </div>    
     <div class="flex">

@@ -27,7 +27,6 @@ class ContactResource extends Resource
     {
         return $form
             ->schema([
-
                 Forms\Components\Select::make('contact_group_id')
                     ->options(
                         ContactGroup::query()

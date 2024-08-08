@@ -21,7 +21,7 @@ class ContactFactory extends Factory
             'email' => $this->faker->email(),
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-            'contact_group_id' => ContactGroup::inRandomOrder()->first(),
+            'contact_group_id' => ContactGroup::factory(),
         ];
     }
 }

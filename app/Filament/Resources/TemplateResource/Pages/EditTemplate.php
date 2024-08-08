@@ -16,4 +16,9 @@ class EditTemplate extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'The template has been updated';
+    }
 }

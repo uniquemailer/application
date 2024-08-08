@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Template;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,8 +19,10 @@ class CreateServicesTable extends Migration
             $table->string('name', 100);
             $table->string('slug')->unique();
             $table->string('email_type')->default('HTML');
-            $table->unsignedBigInteger('template_id')->nullable()->unsigned();
-            $table->foreign('template_id')->references('id')->onDelete('cascade')->on('templates');
+            $table->foreignIdFor(Template::class)->noActionOnUpdate();
+
+/*             $table->unsignedBigInteger('template_id')->nullable()->unsigned();
+            $table->foreign('template_id')->references('id')->onDelete('cascade')->on('templates'); */
             $table->softDeletes();
             $table->timestamps();
         });

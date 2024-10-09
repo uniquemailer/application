@@ -15,11 +15,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ContactGroupResource extends Resource
 {
-    protected static ?int $navigationSort = 4;
-
     protected static ?string $model = ContactGroup::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
+    protected static ?int $navigationSort = 4;
+
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -36,14 +36,14 @@ class ContactGroupResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+    
             ])
             ->filters([
-
-
-
+                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -52,19 +52,10 @@ class ContactGroupResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContactGroups::route('/'),
-            'create' => Pages\CreateContactGroup::route('/create'),
-            'edit' => Pages\EditContactGroup::route('/{record}/edit'),
+            'index' => Pages\ManageContactGroups::route('/'),
         ];
     }
 }

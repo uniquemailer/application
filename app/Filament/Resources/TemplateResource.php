@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TemplateResource\Pages;
 use App\Models\Template;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -22,26 +23,28 @@ class TemplateResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required(),
-                Forms\Components\TextInput::make('subject'),
 
-                Forms\Components\TagsInput::make('placeholders')
-                    ->separator(',')
-                    ->placeholder('Placeholders')
-                    ->columnSpanFull(),
-                Forms\Components\TagsInput::make('sensitive_placeholders')
-                    ->separator(',')
-                    ->placeholder('Sensitive Placeholders')
-                    ->columnSpanFull(),
+                Section::make([
+                    Forms\Components\TextInput::make('name')
+                        ->required(),
+                    Forms\Components\TextInput::make('subject'),
 
-                Forms\Components\Textarea::make('html_template')
-                ->autosize()
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('text_template')
-                ->autosize()
-                    ->columnSpanFull(),
+                    Forms\Components\TagsInput::make('placeholders')
+                        ->separator(',')
+                        ->placeholder('Placeholders')
+                        ->columnSpanFull(),
+                    Forms\Components\TagsInput::make('sensitive_placeholders')
+                        ->separator(',')
+                        ->placeholder('Sensitive Placeholders')
+                        ->columnSpanFull(),
 
+                    Forms\Components\Textarea::make('html_template')
+                        ->autosize()
+                        ->columnSpanFull(),
+                    Forms\Components\Textarea::make('text_template')
+                        ->autosize()
+                        ->columnSpanFull(),
+                ])
             ]);
     }
 

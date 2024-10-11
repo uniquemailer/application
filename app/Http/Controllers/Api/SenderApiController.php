@@ -12,7 +12,7 @@ use App\Http\Requests\SendEmailRequest;
 use App\Services\EmailService;
 use App\Services\LogService;
 
-class SenderApiController extends Controller
+class SenderApiController extends ApiController
 {
     public function notfound()
     {

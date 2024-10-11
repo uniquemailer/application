@@ -9,6 +9,10 @@ class Receipt
 {
     protected array $emails = [];
 
+    protected array $contactGroups;
+
+    
+
     public function setToEmails(array $emails)
     {
         foreach ($emails as $email) {
@@ -21,7 +25,7 @@ class Receipt
     {
         foreach ($contactGroups as $contactGroup) {
             foreach ($contactGroup->contacts as $contact) {
-                $this->emails[]  = $contact->email;
+                $this->contactGroups[]  = $contact->email;
             }
         }
         return $this;
@@ -30,5 +34,10 @@ class Receipt
     public function getEmailCollection()
     {
         return collect($this->emails);
+    }
+
+    public function getGroupEmailCollection()
+    {
+        return collect($this->contactGroups);
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\SenderApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['api', 'auth:sanctum']], function(){
-    Route::post('/services/{service}/send', [App\Http\Controllers\Api\ApiController::class, 'send'])
+    Route::post('/services/{service}/send', [SenderApiController::class, 'send'])
                     ->name('sendby.service')
                     ->missing(function (Request $request) {
                             abort(404);
     });
-/*     Route::get('/notfound', [App\Http\Controllers\Api\ApiController::class, 'notfound'])->name('api.notfound');
+/*     
+    Route::get('/notfound', [App\Http\Controllers\Api\ApiController::class, 'notfound'])->name('api.notfound');
     Route::get('/services', [App\Http\Controllers\Api\ServiceController::class, 'index'])->name('service.index');
     Route::get('/services/{service}/show', [App\Http\Controllers\Api\ServiceController::class, 'show'])->name('service.show');
     Route::get('/templates', [App\Http\Controllers\Api\TemplateController::class, 'index'])->name('template.index');

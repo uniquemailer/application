@@ -20,28 +20,5 @@ class ApiController extends Controller
     {
         return response(null, 404)->header('Content-Type', 'application/json');
     }
-
-    public function send(SendEmailRequest $request, Service $service, LogService $logService, EmailService $emailService)
-    {
-        $email = new Email();
-        $email->setService($service);
-        $email->createContent($request->data);
-        $email->setTransactionId($request->transaction_id);
-
-        $to_emails = $email->getEmailsFromRequest($request->to);
-        $transactionId = $email->getTransactionId();
-
-        $user = Auth::user();
-        
-        $logService->log($request, $email->getSensitiveKeys(), $transactionId, $service->id, $user);
-       
-        $contactGroups = $service->contactGroups()->with('contacts')->get();
-        $receipt = (new Receipt())
-                    ->setToEmails($to_emails)
-                    ->setGroupEmails($contactGroups);
-
-        $emailService->sendQueue($receipt, $email);
-        
-        return response()->json(['message' => 'The email saved to queue', 'queue_id' => $transactionId], 201); 
-    }    
+ 
 }

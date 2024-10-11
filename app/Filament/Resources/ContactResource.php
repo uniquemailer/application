@@ -7,6 +7,8 @@ use App\Filament\Resources\ContactResource\RelationManagers;
 use App\Models\Contact;
 use App\Models\ContactGroup;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Split;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -27,21 +29,26 @@ class ContactResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('contact_group_id')
-                    ->options(
-                        ContactGroup::query()
-                            ->pluck('name', 'id')
-                            ->toArray()
-                    )->label('Contact Group')
-                    ->required(),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required(),
-                Forms\Components\TextInput::make('first_name'),
-                Forms\Components\TextInput::make('last_name'),
+                   Section::make([
+                        Forms\Components\Select::make('contact_group_id')
+                            ->options(
+                                ContactGroup::query()
+                                    ->pluck('name', 'id')
+                                    ->toArray()
+                            )->label('Contact Group')
+                            ->required(),
+                        Forms\Components\TextInput::make('email')
+                            ->email()
+                            ->required(),
+                    ])->columns(2),
+
+                    Section::make([
+                        Forms\Components\TextInput::make('first_name'),
+                        Forms\Components\TextInput::make('last_name'),
+
+                    ])->columns(2)
             ]);
     }
-
     public static function table(Table $table): Table
     {
         return $table
@@ -83,9 +90,7 @@ class ContactResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContacts::route('/'),
-            'create' => Pages\CreateContact::route('/create'),
-            'edit' => Pages\EditContact::route('/{record}/edit'),
+            'index' => Pages\ManageContact::route('/'),
         ];
     }
 }

@@ -1,78 +1,84 @@
 <x-filament-panels::page>
 
-    <h3 class="text-lg font-bold">{{$this->data['name']}}</h3>
 
+    <h1 class="text-lg font-bold">{{$this->data['name']}}</h1>
 
-    <div class="flex">
-        <div class="w-32 ">
+    <div class="grid grid-cols-5 gap-4">
+
+        <div class="col-span-1 bg-gray-300 p-4">
             Template:
         </div>
-        <div class="grow">
+
+        <div class="col-span-4 bg-white p-4">
             {{ $record->template->name }}
         </div>
-    </div>  
 
-    <div class="flex">
-        <div class="w-32 ">
+        <div class="col-span-1 bg-gray-300 p-4">
             Email Format:
         </div>
-        <div class="grow">
+
+        <div class="col-span-4 bg-white p-4">
             {{ $record->email_type }}
         </div>
-    </div>  
 
 
-    <div class="flex">
-        <div class="w-32 ">
+        <div class="col-span-1 bg-gray-300 p-4">
             Contact Groups:
         </div>
-        <div class="grow">
+
+        <div class="col-span-4 bg-white p-4">
             {{ $record->contactGroupsList() }}
         </div>
-    </div>  
 
+    </div>
+    <h2 class="text-lg font-bold">Email Template:</h2>
 
-    <h4 class="text-lg font-bold">Email Template:</h4>
-
-    <div class="flex">
-        <div class="w-32 ">
+    <div class="grid grid-cols-5 gap-4">
+        <div class="col-span-1 bg-gray-300 p-4">
             Subject:
         </div>
-        <div class="grow">
-        {{ $record->template->subject }}
+
+        <div class="col-span-4 bg-white p-4">
+            {{ $record->template->subject }}
         </div>
-    </div>
-    <div class="flex">
-        <div class="w-32 ">
+
+        <div class="col-span-1 bg-gray-300 p-4">
             Public Placeholders:
         </div>
-        <div class="grow">
+
+        <div class="col-span-4 bg-white p-4">
             {{ $record->template->placeholders_list }}
         </div>
-    </div>
-    <div class="flex">
-        <div class="w-32 ">
+
+
+        <div class="col-span-1 bg-gray-300 p-4">
             Sensitive Placeholders:
         </div>
-        <div class="grow"> 
+
+        <div class="col-span-4 bg-white p-4">
             {{ $record->template->sensitive_placeholders_list }}
         </div>
     </div>
+    <h2 class="text-lg font-bold">API Endpoint:</h2>
 
-    <div class="flex">
-        <div class="w-32 ">
-            API Endpoint:
+    <div class="grid grid-cols-5 gap-4">
+
+        <div class="col-span-1 bg-gray-300 p-4">
+            URL:
         </div>
-        <div class="grow">
+
+        <div class="col-span-4 bg-white p-4">
             <code>(POST) {{ env('APP_URL') }}/api/services/{{ $record->slug }}/send</code>
         </div>
-    </div>    
-    <div class="flex">
-        <div class="w-32 ">
+        <div class="col-span-1 bg-gray-300 p-4">
             Payload:
         </div>
-        <div class="grow">
-            <pre class="bg-gray-100 p-4 text-small">{!!  json_encode($this->getExampleJson(), JSON_PRETTY_PRINT) !!}</pre>
+
+        <div class="col-span-4 bg-white p-4">
+            <pre class="p-4 text-small">{!!  json_encode($this->getExampleJson(), JSON_PRETTY_PRINT) !!}</pre>
         </div>
+
     </div>
+
+
 </x-filament-panels::page>

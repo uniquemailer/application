@@ -20,5 +20,17 @@ class ApiController extends Controller
     {
         return response(null, 404)->header('Content-Type', 'application/json');
     }
+
+    public function include(string $relationship) : bool {
+        $param = request()->get('include');
+
+        if (!isset($param)) {
+            return false;
+        }
+
+        $includeValues = explode(',', strtolower($param));
+
+        return in_array(strtolower($relationship), $includeValues);
+    }
  
 }

@@ -15,18 +15,15 @@ use App\Http\Controllers\Api\SenderApiController;
 |
 */
 
-Route::group(['middleware' => ['api', 'auth:sanctum']], function(){
+Route::group(['middleware' => ['api', 'auth:sanctum']], function () {
     Route::post('/services/{service}/send', [SenderApiController::class, 'send'])
-                    ->name('sendby.service')
-                    ->missing(function (Request $request) {
-                            abort(404);
-    });
+        ->name('sendby.service')
+        ->missing(function (Request $request) {
+            abort(404);
+        });
 
-    Route::apiResource('services', App\Http\Controllers\Api\ServiceController::class)->only(['index', 'show']);
-/*     
-     
-    Route::get('/services', [App\Http\Controllers\Api\ServiceController::class, 'index'])->name('service.index');
-    Route::get('/services/{service}/show', [App\Http\Controllers\Api\ServiceController::class, 'show'])->name('service.show');
-    Route::get('/templates', [App\Http\Controllers\Api\TemplateController::class, 'index'])->name('template.index');
-    Route::get('/audit/emails', [App\Http\Controllers\Api\AuditController::class, 'emails'])->name('audit.emails.index'); */
+
+        Route::apiResource('services', App\Http\Controllers\Api\ServiceController::class)->only(['index', 'show']);
+        Route::get('/templates', [App\Http\Controllers\Api\TemplateController::class, 'index'])->name('template.index');
+ 
 });

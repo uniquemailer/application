@@ -25,5 +25,7 @@ Route::group(['middleware' => ['api', 'auth:sanctum']], function () {
 
         Route::apiResource('services', App\Http\Controllers\Api\ServiceController::class)->only(['index', 'show']);
         Route::get('/templates', [App\Http\Controllers\Api\TemplateController::class, 'index'])->name('template.index');
- 
+        Route::get('/audit/emails', [App\Http\Controllers\Api\AuditLogController::class, 'emails'])->name('audit.emails');
+        Route::get('/audit/api', [App\Http\Controllers\Api\AuditLogController::class, 'api_log'])->name('audit.api_log');
+        Route::get('/audit/{transaction_id}', [App\Http\Controllers\Api\AuditLogController::class, 'transaction'])->name('audit.transaction');
 });

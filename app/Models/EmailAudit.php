@@ -9,4 +9,16 @@ class EmailAudit extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'to',
+        'subject',
+        'service',
+        'template',
+        'transaction_id',
+    ];
+
+    protected $casts = [
+        'to' => 'array',
+    ];
+
 }

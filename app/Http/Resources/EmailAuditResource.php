@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ServiceResource extends JsonResource
+class EmailAuditResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,12 @@ class ServiceResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name' => $this->name,
-            'slug' => $this->slug,
-            'contact_groups' => $this->contactGroupsList(),
-            'template' => new TemplateResource($this->whenLoaded('template')),
+            'to' => $this->to,
+            'subject' => $this->subject,
+            'service' => $this->service,
+            'template' => $this->template,
+            'transaction_id' => $this->transaction_id,
+            'created_at' => $this->created_at
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\SenderApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,15 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => ['api', 'auth:sanctum']], function(){
-    Route::post('/services/{service}/send', [App\Http\Controllers\Api\ApiController::class, 'send'])
-                    ->name('sendby.service')
-                    ->missing(function (Request $request) {
-                            abort(404);
-    });
-/*     Route::get('/notfound', [App\Http\Controllers\Api\ApiController::class, 'notfound'])->name('api.notfound');
-    Route::get('/services', [App\Http\Controllers\Api\ServiceController::class, 'index'])->name('service.index');
-    Route::get('/services/{service}/show', [App\Http\Controllers\Api\ServiceController::class, 'show'])->name('service.show');
-    Route::get('/templates', [App\Http\Controllers\Api\TemplateController::class, 'index'])->name('template.index');
-    Route::get('/audit/emails', [App\Http\Controllers\Api\AuditController::class, 'emails'])->name('audit.emails.index'); */
+Route::group(['middleware' => ['api', 'auth:sanctum']], function () {
+    Route::post('/services/{service}/send', [SenderApiController::class, 'send'])
+        ->name('sendby.service')
+        ->missing(function (Request $request) {
+            abort(404);
+        });
+
+
+        Route::apiResource('services', App\Http\Controllers\Api\ServiceController::class)->only(['index', 'show']);
+        Route::get('/templates', [App\Http\Controllers\Api\TemplateController::class, 'index'])->name('template.index');
+        Route::get('/audit/emails', [App\Http\Controllers\Api\AuditLogController::class, 'emails'])->name('audit.emails');
+        Route::get('/audit/api', [App\Http\Controllers\Api\AuditLogController::class, 'api_log'])->name('audit.api_log');
+        Route::get('/audit/{transaction_id}', [App\Http\Controllers\Api\AuditLogController::class, 'transaction'])->name('audit.transaction');
 });

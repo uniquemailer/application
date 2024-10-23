@@ -12,6 +12,10 @@ class ApiLog extends Model
 
     protected $guarded = ['transaction_id', 'request', 'user_id', 'service_id', 'status'];  
  
+    protected $casts = [
+        'request' => 'array'
+    ];
+
     protected $table = 'api_audits';
 
     public function user()

@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->truncateTables([
             'templates',
-            'services',
-            'contact_groups',
-            'contacts',
+           // 'services',
+          //  'contact_groups',
+          //  'contacts',
             'email_audits',
             'api_audits',
             'users',

@@ -14,9 +14,11 @@
         "guzzlehttp/guzzle": "^7.2",
         "laracraft-tech/laravel-useful-additions": "^3.4",
         "laravel/framework": "^10.10",
+        "laravel/horizon": "^5.29",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "mustache/mustache": "^2.14",
+        "predis/predis": "^2.2",
         "spatie/laravel-permission": "^6.3",
         "spatie/laravel-sluggable": "^3.5"
     },

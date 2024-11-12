@@ -8,6 +8,7 @@ use App\Mail\PostHtmlMail;
 use App\Mail\PostTextMail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Concurrency;
 
 class EmailService
 {
@@ -17,13 +18,23 @@ class EmailService
      * @param Receipt $receipt
      * @param Email $email
      */
-    public function sendQueue(Receipt $receipt, Email $email)
+    public function sendQueue(Receipt $receipt, Email $email): void
+    {
+        [$primary, $group] = Concurrency::run([
+            fn () => $this->sendToPrimaryContact($receipt, $email),
+            fn () => $this->sendToGroups($receipt, $email)
+        ]);
+
+        Log::debug('All emails sent to the list', ['Primary' => $primary, 'Group' => $group]);
+    }
+
+    private function sendToPrimaryContact(Receipt $receipt, Email $email): int
     {
         // Split the email collection into chunks of 1 recipient
         $email_collection = $receipt->getEmailCollection();
-        $groupEmails = $receipt->getGroupEmailCollection();
+        
         $chunks = $email_collection->chunk(1);
-
+        $count = 0;
         // Loop through the chunks and send an email to each one
         foreach ($chunks as $chunk) {
             // Log the transaction id and the recipients being sent to
@@ -40,19 +51,32 @@ class EmailService
                 // Send a text email using the PostTextMail mailable
                 Mail::to($chunk)->queue((new PostTextMail($email))->onQueue('emails'));
             }
+            $count++;
         }
+        return $count;
+    }
 
-        Log::debug('Sending the email tp the group contact list', [
+    private function sendToGroups(Receipt $receipt, Email $email): int
+    {
+        $groupEmails = $receipt->getGroupEmailCollection();
+        Log::debug('Sending the email to the group contact list', [
             'TransactionId' => $email->getTransactionId(),
             'To' => $groupEmails
         ]);
-
-        if ($email->getEmailType() === 'HTML'){
-            // Send an HTML email using the PostHtmlMail mailable
-            Mail::to($groupEmails)->queue((new PostHtmlMail($email))->onQueue('emails'));
-        }else{
-            // Send a text email using the PostTextMail mailable
-            Mail::to($groupEmails)->queue((new PostTextMail($email))->onQueue('emails'));
+        
+        $count = $groupEmails->count();
+        
+        if ($count > 0){
+            if ($email->getEmailType() === 'HTML'){
+                // Send an HTML email using the PostHtmlMail mailable
+                Mail::to($groupEmails)->queue((new PostHtmlMail($email))->onQueue('emails'));
+            }else{
+                // Send a text email using the PostTextMail mailable
+                Mail::to($groupEmails)->queue((new PostTextMail($email))->onQueue('emails'));
+            }
+    
         }
+
+        return $count;
     }
 }

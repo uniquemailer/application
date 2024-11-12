@@ -7,6 +7,7 @@ use App\Models\ContactGroup;
 use App\Models\Service;
 use App\Models\Template;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -21,10 +22,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->truncateTables([
+            'roles',
             'templates',
-           // 'services',
-          //  'contact_groups',
-          //  'contacts',
+            'services',
+            'contact_group_service',
+            'contact_groups',
+            'contacts',
             'email_audits',
             'api_audits',
             'users',
@@ -47,19 +50,16 @@ class DatabaseSeeder extends Seeder
         Service::factory(10)
             ->hasAttached(ContactGroup::factory(3)->create())
             ->create();
-
-
     }
 
     private function truncateTables(array $tables)
     {
-        //DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
-        //Eloquent::unguard();
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+        Model::unguard();
         foreach ($tables as $table) {
             DB::table($table)->truncate();
         }
 
-        //DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
-
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
     }
 }

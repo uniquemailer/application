@@ -1,19 +1,36 @@
 # Unique Mailer 
 
-## Email Sender and Auditing Tool
+## Simplify Your Email Workflow with Templating and Auditing
 
-This is only way to generate emails with templating and audting them together. All you need is to send your email data to API endpoint. You may tail API and Email audit logs. 
+### Effortless Email Generation:
 
-You may create templates and product/services in the application. This will give you a high advantage to update templates. You may create an unique template for each website or service. 
+* Template-Based Emails: Create and customize reusable email templates to streamline your email creation process.
+* Centralized Data Management: Manage your product and service information in one place, making it easy to update and reference in your templates.
+* Automated Email Delivery: Simply send your email data to our API endpoint, and our system will handle the rest.
+
+
+### Robust Monitoring and Auditing:
+
+* Real-time Tracking: Monitor your API and email logs to gain insights into your email performance.
+* Detailed Auditing: Track the status of each email, from sending to delivery, and identify any potential issues.
+
+### Key Benefits:
+
+* Increased Efficiency: Save time and effort with automated email generation and delivery.
+* Improved Accuracy: Reduce errors by using pre-defined templates and data.
+* Enhanced Flexibility: Create unique templates for different websites and services to tailor your email communications.
+* Enhanced Security: Benefit from secure API endpoints and robust data protection measures.
+
+By leveraging our templating and auditing features, you can significantly improve your email workflow and deliver targeted, effective messages to your audience. 
 
 ## Requirements
 
-The software is built with Laravel framework. The current release is based on Laravel v10. All server requirements are the same as with Laravel. We highly recommend you to use Redis for cache and queue support.
+The software is built with the Laravel framework. The current release is based on Laravel v11. All server requirements are the same as with Laravel. We highly recommend you use Redis for cache and queue support.
 
 
 ## Documentation
 
-You can find the entire documentation for this software [on our documentation site](https://uniquemailer.github.io/docs).
+You can find the entire documentation for this software [on our documentation site](https://uniquemailer.mintlify.app/).
 
 ## License
 

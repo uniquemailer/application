@@ -7,6 +7,7 @@ use App\Models\ContactGroup;
 use App\Models\Service;
 use App\Models\Template;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -21,9 +22,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->truncateTables([
+            'roles',
             'templates',
             'services',
             'contact_groups',
+            'contact_group_service',
             'contacts',
             'email_audits',
             'api_audits',
@@ -34,8 +37,8 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'admin']);
 
         Template::factory(5)->create();
-        ContactGroup::factory(10)->create();
-        Contact::factory(100)->create();
+        $groups = ContactGroup::factory(5)->create();
+        Contact::factory(100)->recycle($groups)->create();
 
         User::factory(3)->user()->create();
         User::factory()->admin()->create([
@@ -44,22 +47,19 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Service::factory(10)
-            ->hasAttached(ContactGroup::factory(3)->create())
+        Service::factory(3)
+            ->hasAttached($groups)
             ->create();
-
-
     }
 
     private function truncateTables(array $tables)
     {
-        //DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
-        //Eloquent::unguard();
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+        Model::unguard();
         foreach ($tables as $table) {
             DB::table($table)->truncate();
         }
 
-        //DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
-
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
     }
 }

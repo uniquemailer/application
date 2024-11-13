@@ -9,9 +9,7 @@ class Receipt
 {
     protected array $emails = [];
 
-    protected array $contactGroups;
-
-    
+    protected array $contactGroups = [];
 
     public function setToEmails(array $emails)
     {

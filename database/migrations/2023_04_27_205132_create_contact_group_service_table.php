@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('contact_group_id');
             $table->unique(['service_id', 'contact_group_id']);
             $table->foreign('service_id')->references('id')->on('services');
-            $table->foreign('contact_group_id')->references('id')->on('contact_groups');
+            $table->foreign('contact_group_id')->references('id')->onDelete('cascade')->on('contact_groups'); 
         });
     }
 

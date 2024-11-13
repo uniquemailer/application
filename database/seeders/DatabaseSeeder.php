@@ -25,8 +25,8 @@ class DatabaseSeeder extends Seeder
             'roles',
             'templates',
             'services',
-            'contact_group_service',
             'contact_groups',
+            'contact_group_service',
             'contacts',
             'email_audits',
             'api_audits',
@@ -37,8 +37,8 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'admin']);
 
         Template::factory(5)->create();
-        ContactGroup::factory(10)->create();
-        Contact::factory(100)->create();
+        $groups = ContactGroup::factory(5)->create();
+        Contact::factory(100)->recycle($groups)->create();
 
         User::factory(3)->user()->create();
         User::factory()->admin()->create([
@@ -47,8 +47,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Service::factory(10)
-            ->hasAttached(ContactGroup::factory(3)->create())
+        Service::factory(3)
+            ->hasAttached($groups)
             ->create();
     }
 

@@ -20,7 +20,7 @@ class EmailAuditResource extends JsonResource
             'service' => $this->service,
             'template' => $this->template,
             'transaction_id' => $this->transaction_id,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at->format('Y-m-d H:s'),
         ];
     }
 }

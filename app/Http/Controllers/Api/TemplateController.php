@@ -7,7 +7,6 @@ use App\Models\Template;
 
 class TemplateController extends ApiController
 {
-
     public function index()
     {
         $templates = Template::paginate();

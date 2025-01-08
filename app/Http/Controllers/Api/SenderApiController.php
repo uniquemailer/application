@@ -23,7 +23,6 @@ class SenderApiController extends ApiController
  
     public function send(SendEmailRequest $request, Service $service, LogService $logService, EmailService $emailService)
     {
-
         $transactionId = Pipeline::send(new Email())
             ->through([
                 function (Email $email, Closure $next) use ($service) {
@@ -53,11 +52,11 @@ class SenderApiController extends ApiController
             ->then(function (Email $email) use($emailService, $request, $service) {
                 $to_emails = $email->getEmailsFromRequest($request->to);
                 $contactGroups = $service->contactGroups()->with('contacts')->get();
- 
+  
                 $receipt = (new Receipt())
                     ->setToEmails($to_emails)
                     ->setGroupEmails($contactGroups);
-
+                 
                 $emailService->sendQueue($receipt, $email);
                 
                 return $email->getTransactionId();

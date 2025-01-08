@@ -22,6 +22,9 @@ class Receipt
     public function setGroupEmails($contactGroups)
     {
         foreach ($contactGroups as $contactGroup) {
+            if ($contactGroup->contacts->isEmpty()) {
+                continue;
+            }
             foreach ($contactGroup->contacts as $contact) {
                 $this->contactGroups[]  = $contact->email;
             }
